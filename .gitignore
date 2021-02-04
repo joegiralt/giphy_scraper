@@ -25,3 +25,12 @@ giphy_scraper-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+# environment variables
+.env
+
+# notes and stuff
+.notes
+
+# secrets
+config/config.exs

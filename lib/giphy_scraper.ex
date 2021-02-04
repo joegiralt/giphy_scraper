@@ -1,18 +1,25 @@
 defmodule GiphyScraper do
-  @moduledoc """
-  Documentation for `GiphyScraper`.
-  """
 
-  @doc """
-  Hello world.
+  @giphy_api_key Application.fetch_env!(:giphy_scraper, :giphy_api_key)
 
-  ## Examples
+  def search(query) do
+    GiphyClient.start
+    GiphyClient.get!("gifs/search", search_headers(), search_options(query))
+      |> IO.inspect
+  end
 
-      iex> GiphyScraper.hello()
-      :world
+  defp search_headers do
+    [{"Accept", "application/json"}]
+  end
 
-  """
-  def hello do
-    :world
+  defp search_options(query) do
+    [
+      params: %{
+        api_key: @giphy_api_key,
+        q: query,
+        weirdness: 10,
+        limit: 25
+      }
+    ]
   end
 end
