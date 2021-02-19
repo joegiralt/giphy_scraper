@@ -5,7 +5,12 @@ defmodule GiphyScraper do
   def search(query) do
     GiphyClient.start
     GiphyClient.get!("gifs/search", search_headers(), search_options(query))
-      |> IO.inspect
+      |> body_data
+      |> Enum.map(&GiphyImage.from_map/1)
+  end
+
+  defp body_data(resp) do
+    resp.body[:data] || []
   end
 
   defp search_headers do

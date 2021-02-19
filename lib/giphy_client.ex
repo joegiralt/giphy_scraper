@@ -16,4 +16,5 @@ defmodule GiphyClient do
     |> Jason.decode!
     |> Enum.map(fn({k, v}) -> {String.to_atom(k), v} end)
   end
+
 end
